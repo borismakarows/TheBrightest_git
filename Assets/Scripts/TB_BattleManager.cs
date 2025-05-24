@@ -15,9 +15,6 @@ public class TB_BattleManager : MonoBehaviour
     //Lists
     private List<Unit> allUnits = new List<Unit>();
     private Queue<Unit> turnQueue = new Queue<Unit>();
-    //Advantages
-    private bool playerAdvantage = false;
-    private bool enemyAdvantage = false;
     //Game States
     [HideInInspector] public enum GameStates { RealTime, TurnBased };
     [HideInInspector] public GameStates currentGameState = GameStates.RealTime;
@@ -25,7 +22,7 @@ public class TB_BattleManager : MonoBehaviour
     //Components
     RT_PlayerActions PlayerActions;
     // GameDataToStore
-    [HideInInspector] public List<Unit.UnitData> StoredUnitData; 
+    [HideInInspector] public List<Unit.UnitData> StoredUnitData;
 
 
 
@@ -49,8 +46,8 @@ public class TB_BattleManager : MonoBehaviour
                         player.GetComponent<Unit>().currentUnitData = unitdata;
                     }
                 }
-                allUnits.Add(player.GetComponent<Unit>());
             }
+            allUnits.Add(player.GetComponent<Unit>());
         }
         for (int i = 0; i < enemyActors.Count; i++)
         {
@@ -62,24 +59,27 @@ public class TB_BattleManager : MonoBehaviour
         }
     }
 
-    private void GenerateTurnOrder()
+    private void GenerateTurnOrder(bool playerAdvantege)
     {
+        turnQueue.Clear();
         List<Unit> aliveUnits = allUnits.Where(unit => unit.IsAlive()).ToList();
 
         Debug.Log("Alive Units: " + aliveUnits.Count);
-        if (playerAdvantage)
+        if (playerAdvantege)
         {
+            Debug.Log("playeradvantage");
             var playerUnits = aliveUnits
                 .Where(unit => unit.actorTeamType == Unit.TeamType.Ally)
                 .OrderByDescending(unit => unit.speed);
             var enemyUnits = aliveUnits
             .Where(unit => unit.actorTeamType == Unit.TeamType.Enemy)
             .OrderByDescending(unit => unit.speed);
-            foreach (var unit in playerUnits) turnQueue.Enqueue(unit);
-            foreach (var unit in enemyUnits) turnQueue.Enqueue(unit);
+            foreach (var unit in playerUnits) { turnQueue.Enqueue(unit); }
+            foreach (var unit in enemyUnits) { turnQueue.Enqueue(unit); }
         }
-        else if (enemyAdvantage)
+        else if (!playerAdvantege)
         {
+            Debug.Log("enemyadvantage");
             var enemyUnits = aliveUnits
             .Where(unit => unit.actorTeamType == Unit.TeamType.Enemy)
             .OrderByDescending(u => u.speed);
@@ -97,21 +97,19 @@ public class TB_BattleManager : MonoBehaviour
                 turnQueue.Enqueue(unit);
             }
         }
-
         foreach (var unit in turnQueue)
         {
-            Debug.Log(unit);
+            Debug.Log("Name: " + unit.name + "UnitTeam:" + unit.actorTeamType);
         }
     }
 
     public void StartBattle(bool isPlayerAdvantage, List<GameObject> playerActors, List<GameObject> enemyActors)
     {
-        playerAdvantage = isPlayerAdvantage;
-        enemyAdvantage = !isPlayerAdvantage;
         PlayerActions.enabled = false;
         ChangeGameState(GameStates.TurnBased);
         SpawnAllUnits(playerActors, enemyActors);
-        GenerateTurnOrder();
+        GenerateTurnOrder(isPlayerAdvantage);
+        Turn();
     }
     public void IndexingSelectedObject(List<GameObject> selectedList, GameObject selected, int index)
     {
@@ -128,5 +126,26 @@ public class TB_BattleManager : MonoBehaviour
     {
         StoredUnitData = (List<Unit.UnitData>)allUnits.Where(u => u.IsAlive() && u.actorTeamType == Unit.TeamType.Ally);
     }
+
+    private void Turn()
+    {
+        if (turnQueue.Count == 0)
+        {
+            Debug.Log("No UnitLeft");
+            currentGameState = GameStates.RealTime;
+        }
+        List<Unit> aliveEnemies = turnQueue.Where(u => u.actorTeamType == Unit.TeamType.Enemy && u.IsAlive()).ToList();
+        if (aliveEnemies.Count == 0)
+        {
+            Debug.Log("NoEnemiesLeft");
+            currentGameState = GameStates.RealTime;
+        }
+        Unit current = turnQueue.Dequeue();
+        Debug.Log(current.name + "'s Turn!");
+
+
+        turnQueue.Enqueue(current);
+    }
+
 }
 

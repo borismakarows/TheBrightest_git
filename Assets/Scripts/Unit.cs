@@ -16,6 +16,8 @@ public class Unit : MonoBehaviour
     private bool isAlive = true;
     [HideInInspector] public UnitData currentUnitData;
 
+    public int positionIndex;
+
     public class UnitData
     {
         public int id;

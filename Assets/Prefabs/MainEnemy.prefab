@@ -180,16 +180,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c359fe5d41b5414c92b2a62d1d6cea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actorTeamType: 0
+  actorTeamType: 1
   skills:
   - {fileID: 11400000, guid: 87b86dc83fe9d064ea36d4ecf8eb312c, type: 2}
   maxActionPoints: 1
-  currentActionPoints: 1
   unitName: Slime
   maxHP: 100
-  currentHP: 100
   speed: 5
   unitIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  positionIndex: 0
 --- !u!114 &-1941538707764334656
 MonoBehaviour:
   m_ObjectHideFlags: 0
