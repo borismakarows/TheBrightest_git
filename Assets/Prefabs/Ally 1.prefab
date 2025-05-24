@@ -13,11 +13,9 @@ GameObject:
   - component: {fileID: 5613105929036801989}
   - component: {fileID: 2089437859241692576}
   - component: {fileID: -3121411878292573827}
-  - component: {fileID: 5022221194111977968}
-  - component: {fileID: 2947182925110179280}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: Ally 1
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.074971914, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.8979893, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -186,53 +184,8 @@ MonoBehaviour:
   unitName: Player
   maxHP: 100
   currentHP: 100
-  speed: 10
+  speed: 15
   unitIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
---- !u!114 &5022221194111977968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6707427759093747709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e0129dbcce1c7d48aca686f80c9c3c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 10
-  attackRange: 0.5
-  playerAdvantage: 0
-  attackPoint: {fileID: 3020847949005219374}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  team:
-  - {fileID: 6707427759093747709, guid: fac5afcf047bc904bac72f7582868744, type: 3}
-  - {fileID: 6707427759093747709, guid: 52bfb6040ad0cfb45bd68fb8b6fbaf5b, type: 3}
---- !u!114 &2947182925110179280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6707427759093747709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b673c21b5b313046a05f6df0523731b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  enemySpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  currentGameState: 0
-  playerTurn: 0
 --- !u!1 &9021513058114432991
 GameObject:
   m_ObjectHideFlags: 0

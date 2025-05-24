@@ -1,33 +1,38 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class RT_PlayerActions : MonoBehaviour
 {
     //Stats
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float jumpForce = 10f;
     [SerializeField] float attackRange = 0.5f;
+    public bool playerAdvantage;
 
     //Components
     private Rigidbody2D rb;
     private bool isGrounded;
+    private TB_BattleManager battleManager;
     [SerializeField] Transform attackPoint;
     [SerializeField] LayerMask enemyLayer;
+    public List<GameObject> team;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        battleManager = GetComponent<TB_BattleManager>();
+        team.Add(gameObject);
     }
 
     void Update()
     {
-        Movement();
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (battleManager.currentGameState == TB_BattleManager.GameStates.RealTime)
         {
+            Movement();
             Attack();
         }
     }
-
 
     void Movement()
     {
@@ -41,22 +46,26 @@ public class PlayerMovement : MonoBehaviour
 
     void Attack()
     {
-        Collider2D hitenemy = Physics2D.OverlapCircle(attackPoint.position, attackRange, enemyLayer);
-        if (hitenemy != null)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Debug.Log("Hit:" + hitenemy.name);
+            Collider2D hitenemy = Physics2D.OverlapCircle(attackPoint.position, attackRange, enemyLayer);
+            if (hitenemy != null)
+            {
+                Debug.Log("Hit:" + hitenemy.name);
+                playerAdvantage = true;
+                battleManager.StartBattle(playerAdvantage, team, hitenemy.GetComponent<Enemy>().team);
+            }
+            else { Debug.Log("missed"); }
         }
-        else{ Debug.Log("missed"); }
     }
-
+    
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-
-
+   
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -64,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
         }
     }
+   
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
