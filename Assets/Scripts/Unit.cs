@@ -7,13 +7,14 @@ public class Unit : MonoBehaviour
 {
     public enum TeamType { Ally, Enemy };
     public TeamType actorTeamType;
-    public Skills[] skills;
+    public Skill[] skills;
     [SerializeField] int maxActionPoints;
     [SerializeField] string unitName;
     [SerializeField] int maxHP;
     public int speed;
     [SerializeField] Sprite unitIcon;
     private bool isAlive = true;
+    [HideInInspector] bool isStunned;
     [HideInInspector] public UnitData currentUnitData;
 
     public int positionIndex;
@@ -26,9 +27,10 @@ public class Unit : MonoBehaviour
 
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool stun)
     {
         currentUnitData.currentHP -= damage;
+        isStunned = stun;
         if (currentUnitData.currentHP < 0)
         {
             isAlive = false;

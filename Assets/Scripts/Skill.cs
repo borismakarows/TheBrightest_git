@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Skills", menuName = "Game/Skill")]
-public class Skills : ScriptableObject
+public class Skill : ScriptableObject
 {
     public enum SkillTypes
     {
@@ -13,8 +13,13 @@ public class Skills : ScriptableObject
     };
     [SerializeField] SkillTypes skillType;
     [SerializeField] string skillName;
-    [SerializeField] string skillDescription; 
+    [SerializeField] string skillDescription;
     [SerializeField] int cost;
     [SerializeField] int damage;
     [SerializeField] GameObject effectPrefab;
+
+    public void SkillActivation(GameObject player)
+    {
+        
+    }
 }

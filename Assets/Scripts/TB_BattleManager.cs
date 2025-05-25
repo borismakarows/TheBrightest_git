@@ -24,8 +24,6 @@ public class TB_BattleManager : MonoBehaviour
     // GameDataToStore
     [HideInInspector] public List<Unit.UnitData> StoredUnitData;
 
-
-
     void Start()
     {
         PlayerActions = GetComponent<RT_PlayerActions>();
