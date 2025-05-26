@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class TB_BattleManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class TB_BattleManager : MonoBehaviour
     [HideInInspector] public enum GameStates { RealTime, TurnBased };
     [HideInInspector] public GameStates currentGameState = GameStates.RealTime;
     [HideInInspector] public bool playerTurn;
+    [HideInInspector] public bool actionTaken;
     //Components
     RT_PlayerActions PlayerActions;
     // GameDataToStore
@@ -67,10 +69,9 @@ public class TB_BattleManager : MonoBehaviour
         turnQueue.Clear();
         List<Unit> aliveUnits = allUnits.Where(unit => unit.IsAlive()).ToList();
 
-        Debug.Log("Alive Units: " + aliveUnits.Count);
         if (playerAdvantege)
         {
-            Debug.Log("playeradvantage");
+           // Debug.Log("Suprise Attack");
             var playerUnits = aliveUnits
                 .Where(unit => unit.actorTeamType == Unit.TeamType.Ally)
                 .OrderByDescending(unit => unit.speed);
@@ -100,10 +101,11 @@ public class TB_BattleManager : MonoBehaviour
                 turnQueue.Enqueue(unit);
             }
         }
-        foreach (var unit in turnQueue)
-        {
-            Debug.Log("Name: " + unit.name + "UnitTeam:" + unit.actorTeamType);
-        }
+        
+        //foreach (var unit in turnQueue)
+        //{
+          //  Debug.Log(unit.name);
+        //}
     }
 
     public void StartBattle(bool isPlayerAdvantage, List<GameObject> playerActors, List<GameObject> enemyActors)
@@ -112,7 +114,7 @@ public class TB_BattleManager : MonoBehaviour
         ChangeGameState(GameStates.TurnBased);
         SpawnAllUnits(playerActors, enemyActors);
         GenerateTurnOrder(isPlayerAdvantage);
-        Turn();
+        NextTurn();
     }
     public void IndexingSelectedObject(List<GameObject> selectedList, GameObject selected, int index)
     {
@@ -130,7 +132,7 @@ public class TB_BattleManager : MonoBehaviour
         StoredUnitData = (List<Unit.UnitData>)allUnits.Where(u => u.IsAlive() && u.actorTeamType == Unit.TeamType.Ally);
     }
 
-    private void Turn()
+    private void NextTurn()
     {
         if (turnQueue.Count == 0)
         {
@@ -144,10 +146,48 @@ public class TB_BattleManager : MonoBehaviour
             currentGameState = GameStates.RealTime;
         }
         Unit current = turnQueue.Dequeue();
-        Debug.Log(current.name + "'s Turn!");
-
-
+        Debug.Log(current.name+" 's Turn");
+        
+        if (current.actorTeamType == Unit.TeamType.Ally)
+        {
+            current.transform.position = playerSpawnPoints[0].position;
+            foreach (Button skillButton in UI_Manager.Instance.B_Skills)
+            {
+                skillButton.gameObject.SetActive(true);
+                skillButton.onClick.AddListener(() => AllySkillUse(skillButton, current));
+            }
+        }
+        else
+        {
+            foreach (Button skillButton in UI_Manager.Instance.B_Skills)
+            {
+                skillButton.gameObject.SetActive(false);
+            }
+        }
         turnQueue.Enqueue(current);
+    }
+
+    public void AllySkillUse(Button skillButton, Unit current)
+    {
+        switch (skillButton.name)
+        {
+            case "B_Attack":
+                Debug.Log("LightAttack by: " + current.name);
+                NextTurn();
+                break;
+            case "B_Special":
+                Debug.Log("Special");
+                NextTurn();
+                break;
+            case "B_Defence":
+                Debug.Log("Defence");
+                NextTurn();
+                break;
+            case "B_Rest": 
+                Debug.Log("Rest");
+                NextTurn();
+                break;
+        }
     }
 
 }

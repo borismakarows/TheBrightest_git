@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3121411878292573827}
   - component: {fileID: 2314563434753308695}
   - component: {fileID: 5755247704338187838}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Countess
   m_TagString: Ally
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3020847949005219374}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

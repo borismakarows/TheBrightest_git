@@ -30,10 +30,6 @@ public class Unit : MonoBehaviour
         public int currentHP;
         public int currentActionPoints;
     }
-    void Start()
-    {
-        SetUpListeners();
-    }
 
     public void TakeDamage(int damage, bool stun)
     {
@@ -55,31 +51,5 @@ public class Unit : MonoBehaviour
     {
         currentUnitData = Data;
     }
-
-    public void SetUpListeners()
-    {
-        foreach (Button skillButton in UI_Manager.Instance.B_Skills)
-        {
-            switch (skillButton.name)
-            {
-                case "B_Attack":
-                    skillButton.onClick.AddListener(() => SkillUse(Skill.SkillTypes.LightAttack));
-                    break;
-                case "B_Special":
-                    skillButton.onClick.AddListener(() => SkillUse(Skill.SkillTypes.Special));
-                    break;
-                case "B_Defence":
-                    skillButton.onClick.AddListener(() => SkillUse(Skill.SkillTypes.Defense));
-                    break;
-                case "B_Rest":
-                    skillButton.onClick.AddListener(() => SkillUse(Skill.SkillTypes.Rest));
-                    break;
-            }
-        }
-    }
-
-    public void SkillUse(Skill.SkillTypes skillType)
-    {
-        LightAttack.SkillActivation("asdads");
-    }
+ 
 }

@@ -22,4 +22,9 @@ public class Skill : ScriptableObject
     {
         Debug.Log("Skill Used By: " + text + "Skill Type: " + skillType.ToString());
     }
+    
+    public void Test()
+    {
+        Debug.Log("Testing Interface");
+    }
 }
