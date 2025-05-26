@@ -6,20 +6,20 @@ public class Skill : ScriptableObject
 {
     public enum SkillTypes
     {
-        Light,
+        LightAttack,
         Special,
         Defense,
         Rest
     };
-    [SerializeField] SkillTypes skillType;
-    [SerializeField] string skillName;
-    [SerializeField] string skillDescription;
-    [SerializeField] int cost;
-    [SerializeField] int damage;
+    public SkillTypes skillType;
+    public string skillName;
+    public string skillDescription;
+    public int cost;
+    public int damage;
     [SerializeField] GameObject effectPrefab;
 
-    public void SkillActivation(GameObject player)
+    public void SkillActivation(string text)
     {
-        
+        Debug.Log("Skill Used By: " + text + "Skill Type: " + skillType.ToString());
     }
 }

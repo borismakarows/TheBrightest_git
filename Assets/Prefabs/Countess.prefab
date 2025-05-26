@@ -11,14 +11,12 @@ GameObject:
   - component: {fileID: 1420926854052877853}
   - component: {fileID: 8274961797931661097}
   - component: {fileID: 5613105929036801989}
-  - component: {fileID: 2089437859241692576}
   - component: {fileID: -3121411878292573827}
-  - component: {fileID: 5022221194111977968}
-  - component: {fileID: 90700637734030509}
-  - component: {fileID: 3301146592679332875}
+  - component: {fileID: 2314563434753308695}
+  - component: {fileID: 5755247704338187838}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: Countess
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.564128, y: -2.8916402, z: 0}
-  m_LocalScale: {x: 1.145, y: 1, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3020847949005219374}
@@ -83,12 +81,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4723107735738678597, guid: a80446c1d4ed12845b8c1ce200c3d054, type: 3}
+  m_Sprite: {fileID: 4723107735738678597, guid: 4cc451c69eadd8748a14639417433309, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.54, y: 0.71}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -121,8 +119,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &2089437859241692576
-BoxCollider2D:
+--- !u!114 &-3121411878292573827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6707427759093747709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c359fe5d41b5414c92b2a62d1d6cea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actorTeamType: 0
+  LightAttack: {fileID: 11400000, guid: a982d43c8242cff46ab61a80144ba5e7, type: 2}
+  Special: {fileID: 11400000, guid: d69b88251a419a744a60aaaea1ce28a8, type: 2}
+  Defence: {fileID: 11400000, guid: 881db2ce47e073d41a3b4d99c98be568, type: 2}
+  Rest: {fileID: 11400000, guid: 87b86dc83fe9d064ea36d4ecf8eb312c, type: 2}
+  maxActionPoints: 10
+  unitName: Player
+  maxHP: 100
+  speed: 5
+  unitIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  currentUnitData:
+    id: 3
+    currentHP: 100
+    currentActionPoints: 100
+  positionIndex: 0
+--- !u!70 &2314563434753308695
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -155,85 +180,10 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0042226017, y: 0.0072523355}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.3, y: 0.67}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 0.33282202, y: 0.6953995}
-  m_EdgeRadius: 0
---- !u!114 &-3121411878292573827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6707427759093747709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c359fe5d41b5414c92b2a62d1d6cea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actorTeamType: 0
-  skills:
-  - {fileID: 11400000, guid: 87b86dc83fe9d064ea36d4ecf8eb312c, type: 2}
-  maxActionPoints: 10
-  unitName: Player
-  maxHP: 100
-  speed: 10
-  unitIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  positionIndex: 0
---- !u!114 &5022221194111977968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6707427759093747709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e0129dbcce1c7d48aca686f80c9c3c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 10
-  attackRange: 0.3
-  playerAdvantage: 0
-  attackPoint: {fileID: 3020847949005219374}
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  team:
-  - {fileID: 6707427759093747709, guid: fac5afcf047bc904bac72f7582868744, type: 3}
-  - {fileID: 6707427759093747709, guid: 52bfb6040ad0cfb45bd68fb8b6fbaf5b, type: 3}
---- !u!114 &90700637734030509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6707427759093747709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b673c21b5b313046a05f6df0523731b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  enemySpawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  currentGameState: 0
-  playerTurn: 0
---- !u!95 &3301146592679332875
+  m_Offset: {x: -0.022584865, y: 0.003131787}
+  m_Size: {x: 0.35751238, y: 0.7037365}
+  m_Direction: 0
+--- !u!95 &5755247704338187838
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -243,7 +193,7 @@ Animator:
   m_GameObject: {fileID: 6707427759093747709}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 62d2ca901e4192a41b340e2ad77af9e7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4156c4732975dee4685547c7efccf0dd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -280,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 9021513058114432991}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.425, y: -0.024, z: 0.06935124}
+  m_LocalPosition: {x: 0.381, y: -0.012, z: 0.06935124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

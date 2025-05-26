@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -7,12 +8,12 @@ public class RT_PlayerActions : MonoBehaviour
 {
     //Stats
     [SerializeField] float moveSpeed = 5f;
-
     [SerializeField] float attackRange = 0.5f;
-    public bool playerAdvantage;
+    [SerializeField] float delayToBattleArena = 1f;
+    [HideInInspector] public bool playerAdvantage;
 
     //Components
-    public SpriteRenderer sprite;
+    [HideInInspector] public SpriteRenderer sprite;
     private Rigidbody2D rb;
     private bool isGrounded;
     private TB_BattleManager battleManager;
@@ -24,15 +25,16 @@ public class RT_PlayerActions : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         battleManager = GetComponent<TB_BattleManager>();
         team.Add(gameObject);
         UI_Manager.Instance.SetSkillButtonsActive(battleManager.currentGameState == TB_BattleManager.GameStates.TurnBased);
-        animator = GetComponent<Animator>();
-        sprite = GetComponent<SpriteRenderer>();
-    }   
+    }
 
     void Update()
     {
+
         if (battleManager.currentGameState == TB_BattleManager.GameStates.RealTime)
         {
             Attack();
@@ -41,7 +43,7 @@ public class RT_PlayerActions : MonoBehaviour
 
     void FixedUpdate()
     {
-         if (battleManager.currentGameState == TB_BattleManager.GameStates.RealTime)
+        if (battleManager.currentGameState == TB_BattleManager.GameStates.RealTime)
         {
             Movement();
         }
@@ -68,24 +70,20 @@ public class RT_PlayerActions : MonoBehaviour
         {
             Collider2D hitenemy = Physics2D.OverlapCircle(attackPoint.position, attackRange, enemyLayer);
             animator.SetTrigger("IsAttacking");
-            if (hitenemy != null)
+            if (hitenemy != null && hitenemy != gameObject)
             {
-                Debug.Log("Hit:" + hitenemy.name);
-                playerAdvantage = true;
-                battleManager.StartBattle(playerAdvantage, team, hitenemy.GetComponent<Enemy>().team);
-                CameraController.Instance.MoveToBattle(transform);
-                UI_Manager.Instance.SetSkillButtonsActive(battleManager.currentGameState == TB_BattleManager.GameStates.TurnBased);
+                StartCoroutine(DelayedTeleportToBattleArea(delayToBattleArena, hitenemy));
             }
         }
     }
-    
+
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
-   
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -94,7 +92,7 @@ public class RT_PlayerActions : MonoBehaviour
             animator.SetBool("IsFalling", false);
         }
     }
-   
+
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -103,4 +101,12 @@ public class RT_PlayerActions : MonoBehaviour
         }
     }
 
+    IEnumerator DelayedTeleportToBattleArea(float Seconds, Collider2D hitenemy)
+    {
+        yield return new WaitForSeconds(Seconds);
+        playerAdvantage = true;
+        battleManager.StartBattle(playerAdvantage, team, hitenemy.GetComponent<Enemy>().team);
+        CameraController.Instance.MoveToBattle(transform);
+        UI_Manager.Instance.SetSkillButtonsActive(battleManager.currentGameState == TB_BattleManager.GameStates.TurnBased);
+    }
 }

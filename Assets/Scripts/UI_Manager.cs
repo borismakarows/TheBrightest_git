@@ -6,10 +6,7 @@ using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour
 {
     public static UI_Manager Instance;
-    public Button LightAttack;
-    public Button Special;
-    public Button Defence;
-    public Button Rest;
+    public List<Button> B_Skills;
 
     void Awake()
     {
@@ -24,11 +21,11 @@ public class UI_Manager : MonoBehaviour
 
     public void SetSkillButtonsActive(bool active)
     {
-        LightAttack.gameObject.SetActive(active);
-        Special.gameObject.SetActive(active);
-        Defence.gameObject.SetActive(active);
-        Rest.gameObject.SetActive(active);
-        
+        foreach (Button skillButton in B_Skills)
+        {
+            skillButton.gameObject.SetActive(active);
+        }
     }
+
 
 }

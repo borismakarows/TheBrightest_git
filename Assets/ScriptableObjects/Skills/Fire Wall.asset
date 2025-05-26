@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4036d9c81e005c74eae06edbba67eb45, type: 3}
-  m_Name: Slash
+  m_Name: Fire Wall
   m_EditorClassIdentifier: 
-  skillType: 0
-  skillName: Slash
-  skillDescription: slashing through enemies
+  skillType: 2
+  skillName: Fire Wall
+  skillDescription: Protect you and your teammates
   cost: 1
-  damage: 20
+  damage: 0
   effectPrefab: {fileID: 0}

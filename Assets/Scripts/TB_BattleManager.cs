@@ -31,12 +31,17 @@ public class TB_BattleManager : MonoBehaviour
 
     public void SpawnAllUnits(List<GameObject> PlayerActors, List<GameObject> enemyActors)
     {
-        for (int i = 0; i < PlayerActors.Count; i++)
+        if (StoredUnitData == null)
         {
-            GameObject[] playerTeamArray = PlayerActors.OrderByDescending(u => u.GetComponent<Unit>().speed).ToArray();
-            GameObject player = Instantiate(playerTeamArray[i], playerSpawnPoints[i].position, Quaternion.identity);
-            if (StoredUnitData != null)
+            foreach (var playerActor in PlayerActors)
             {
+                StoredUnitData.Add(playerActor.GetComponent<Unit>().currentUnitData);
+            }
+        }
+        for (int i = 0; i < PlayerActors.Count; i++)
+            {
+                GameObject[] playerTeamArray = PlayerActors.OrderByDescending(u => u.GetComponent<Unit>().speed).ToArray();
+                GameObject player = Instantiate(playerTeamArray[i], playerSpawnPoints[i].position, Quaternion.identity);
                 foreach (Unit.UnitData unitdata in StoredUnitData)
                 {
                     if (player.GetComponent<Unit>().currentUnitData.id == unitdata.id)
@@ -44,9 +49,9 @@ public class TB_BattleManager : MonoBehaviour
                         player.GetComponent<Unit>().currentUnitData = unitdata;
                     }
                 }
+
+                allUnits.Add(player.GetComponent<Unit>());
             }
-            allUnits.Add(player.GetComponent<Unit>());
-        }
         for (int i = 0; i < enemyActors.Count; i++)
         {
             {
