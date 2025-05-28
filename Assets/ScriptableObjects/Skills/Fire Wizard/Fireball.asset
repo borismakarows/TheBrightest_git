@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3bf2bb0f1270945b6fefda3a11b879, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 1003342424005222218, guid: d83c3b2add959024fa1e57c7fc8691f7, type: 3}

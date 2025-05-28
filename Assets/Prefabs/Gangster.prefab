@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3121411878292573827}
   - component: {fileID: -2638534755926989453}
   m_Layer: 7
-  m_Name: Cyborg
+  m_Name: Gangster
   m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

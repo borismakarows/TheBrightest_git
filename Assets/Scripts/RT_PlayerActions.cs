@@ -30,6 +30,7 @@ public class RT_PlayerActions : MonoBehaviour
         battleManager = GetComponent<TB_BattleManager>();
         team.Add(gameObject);
         UI_Manager.Instance.SetSkillButtonsActive(battleManager.currentGameState == TB_BattleManager.GameStates.TurnBased);
+        animator.SetTrigger("RT_State");
     }
 
     void Update()
@@ -103,6 +104,7 @@ public class RT_PlayerActions : MonoBehaviour
 
     IEnumerator DelayedTeleportToBattleArea(float Seconds, Collider2D hitenemy)
     {
+        animator.SetTrigger("TB_State");
         yield return new WaitForSeconds(Seconds);
         playerAdvantage = true;
         battleManager.StartBattle(playerAdvantage, team, hitenemy.GetComponent<Enemy>().team);

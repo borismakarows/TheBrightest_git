@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8645510395991665907}
   m_Layer: 6
   m_Name: Enemy 2
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,7 +184,6 @@ MonoBehaviour:
   Special: {fileID: 0}
   Defence: {fileID: 0}
   Rest: {fileID: 0}
-  ChangePosition: {fileID: 0}
   maxActionPoints: 1
   currentActionPoints: 1
   unitName: Slime
@@ -195,3 +194,4 @@ MonoBehaviour:
     id: 0
     currentHP: 100
     positionIndex: 0
+  animator: {fileID: 0}

@@ -12,9 +12,6 @@ public class TB_BattleManager : MonoBehaviour
     //Spawn Points
     [SerializeField] Transform[] playerSpawnPoints;
     [SerializeField] Transform[] enemySpawnPoints;
-    private Transform playerFrontSpawnPoint;
-    private Transform playerMiddleSpawnPoint;
-    private Transform playerBackSpawnPoint;
     //Lists
     private List<Unit> allUnits = new List<Unit>();
     private Queue<Unit> turnQueue = new Queue<Unit>();
@@ -166,26 +163,25 @@ public class TB_BattleManager : MonoBehaviour
  
     public void AllySkillUse(Button skillButton, Unit current)
     {
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy").ToArray();
+        Debug.Log(targets[0]);
         switch (skillButton.name)
         {
             case "B_Attack":
-                current.LightAttack.SkillActivation(current.gameObject, current.gameObject);
-                current.animator.SetTrigger("LightAttack");
+                current.LightAttack.SkillActivation(current.gameObject, targets);
                 NextTurn();
                 break;
             case "B_Special":
-                current.Special.SkillActivation(current.gameObject, current.gameObject);
+                current.Special.SkillActivation(current.gameObject, targets);
                 NextTurn();
                 break;
             case "B_Defence":
-                current.Defence.SkillActivation(current.gameObject, current.gameObject);
+                current.Defence.SkillActivation(current.gameObject, targets);
                 NextTurn();
                 break;
             case "B_Rest":
-                current.Rest.SkillActivation(current.gameObject, current.gameObject);
+                current.Rest.SkillActivation(current.gameObject, targets);
                 NextTurn();
-                break;
-            case "B_ChangePos":
                 break;
         }
     }

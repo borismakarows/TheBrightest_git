@@ -9,15 +9,24 @@ public abstract class Skill : ScriptableObject
         LightAttack,
         Special,
         Defense,
-        Rest,
-        ChangePosition
+        Rest
     };
-    public virtual SkillTypes SkillType {get;set;}
+    public enum SkillFeatures
+    {
+        Damage,
+        AOE,
+        Heal,
+        Protection,
+        ActionPoint,
+    }
+    public virtual SkillFeatures SkillFeature { get; set; }
+    public virtual SkillTypes SkillType { get; set; }
     public virtual string SkillName { get; set; }
-    public virtual string SkillDescription { get; set; } 
+    public virtual string SkillDescription { get; set; }
     public virtual int Cost { get; set; }
-    public virtual int Damage{ get; set; }
+    public virtual int Damage { get; set; }
     public virtual GameObject EffectPrefab { get; set; }
+ 
+    public abstract void SkillActivation(GameObject user, GameObject[] targets);
 
-    public abstract void SkillActivation(GameObject user, GameObject target);
 }
