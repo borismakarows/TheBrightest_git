@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4036d9c81e005c74eae06edbba67eb45, type: 3}
-  m_Name: ShortRest
+  m_Script: {fileID: 11500000, guid: 013ea4c3710059f499d6cf393adf97e0, type: 3}
+  m_Name: Flame Jet
   m_EditorClassIdentifier: 
-  skillType: 3
-  skillName: Short Rest
-  skillDescription: Gives you action to perform more powerful
-  cost: 1
-  damage: 0
   effectPrefab: {fileID: 0}

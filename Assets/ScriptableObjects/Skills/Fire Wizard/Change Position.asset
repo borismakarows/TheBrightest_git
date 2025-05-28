@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4036d9c81e005c74eae06edbba67eb45, type: 3}
-  m_Name: Fireball
+  m_Script: {fileID: 11500000, guid: cf5346f286c17564ca9214072af841c6, type: 3}
+  m_Name: Change Position
   m_EditorClassIdentifier: 
-  skillType: 1
-  skillName: Fireball
-  skillDescription: big fireball
-  cost: 1
-  damage: 10
   effectPrefab: {fileID: 0}

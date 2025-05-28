@@ -8,13 +8,18 @@ using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
+    //Team Type
     public enum TeamType { Ally, Enemy };
     public TeamType actorTeamType;
+    //Skill
     public Skill LightAttack;
     public Skill Special;
     public Skill Defence;
     public Skill Rest;
+    public Skill ChangePosition;
+    //Stats
     [SerializeField] int maxActionPoints;
+    public int currentActionPoints;
     [SerializeField] string unitName;
     [SerializeField] int maxHP;
     public int speed;
@@ -22,13 +27,20 @@ public class Unit : MonoBehaviour
     private bool isAlive = true;
     [HideInInspector] bool isStunned;
     public UnitData currentUnitData;
-    public int positionIndex;
+
+    public Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     [System.Serializable]
     public class UnitData
     {
         public int id;
         public int currentHP;
-        public int currentActionPoints;
+        public int positionIndex;
     }
 
     public void TakeDamage(int damage, bool stun)
@@ -47,9 +59,11 @@ public class Unit : MonoBehaviour
     {
         return isAlive;
     }
+
     public void RestoreSavedData(UnitData Data)
     {
         currentUnitData = Data;
     }
  
+    
 }

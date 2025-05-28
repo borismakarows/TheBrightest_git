@@ -132,11 +132,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorTeamType: 0
-  LightAttack: {fileID: 11400000, guid: a982d43c8242cff46ab61a80144ba5e7, type: 2}
-  Special: {fileID: 11400000, guid: d69b88251a419a744a60aaaea1ce28a8, type: 2}
-  Defence: {fileID: 11400000, guid: 881db2ce47e073d41a3b4d99c98be568, type: 2}
-  Rest: {fileID: 11400000, guid: 87b86dc83fe9d064ea36d4ecf8eb312c, type: 2}
+  LightAttack: {fileID: 11400000, guid: c5a78720174107946acdf6231ca53b64, type: 2}
+  Special: {fileID: 0}
+  Defence: {fileID: 0}
+  Rest: {fileID: 0}
+  ChangePosition: {fileID: 0}
   maxActionPoints: 10
+  currentActionPoints: 0
   unitName: Player
   maxHP: 100
   speed: 5
@@ -144,8 +146,7 @@ MonoBehaviour:
   currentUnitData:
     id: 3
     currentHP: 100
-    currentActionPoints: 100
-  positionIndex: 0
+    positionIndex: 2
 --- !u!70 &2314563434753308695
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

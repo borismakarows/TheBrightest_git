@@ -180,12 +180,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorTeamType: 1
-  skills:
-  - {fileID: 11400000, guid: 87b86dc83fe9d064ea36d4ecf8eb312c, type: 2}
+  LightAttack: {fileID: 0}
+  Special: {fileID: 0}
+  Defence: {fileID: 0}
+  Rest: {fileID: 0}
+  ChangePosition: {fileID: 0}
   maxActionPoints: 1
   currentActionPoints: 1
   unitName: Slime
   maxHP: 100
-  currentHP: 100
   speed: 2
   unitIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  currentUnitData:
+    id: 0
+    currentHP: 100
+    positionIndex: 0

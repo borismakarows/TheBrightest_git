@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4036d9c81e005c74eae06edbba67eb45, type: 3}
-  m_Name: Stab
+  m_Script: {fileID: 11500000, guid: ef7aef0434c82b74094f8b2f7fb4d2ec, type: 3}
+  m_Name: Fire Wall
   m_EditorClassIdentifier: 
-  skillType: 0
-  skillName: Slash
-  skillDescription: slashing through enemies
-  cost: 1
-  damage: 20
   effectPrefab: {fileID: 0}
