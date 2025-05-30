@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7aef0434c82b74094f8b2f7fb4d2ec, type: 3}
   m_Name: Fire Wall
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 0}
+  _effectPrefab: {fileID: 6855477787726944734, guid: b649e112085e83844afd210844ff490a, type: 3}
+  skillOffset: {x: 0, y: 0.9, z: 0}

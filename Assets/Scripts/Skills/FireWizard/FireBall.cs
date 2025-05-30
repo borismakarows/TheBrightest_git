@@ -3,7 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-[CreateAssetMenu(menuName = "Skills/Fireball")]
+[CreateAssetMenu(menuName = "Skills/Wizard/Fireball")]
 public class FireBall : Skill
 {
     public override string SkillName { get => "Kuyizaat"; set => base.SkillName = value; }
@@ -13,16 +13,24 @@ public class FireBall : Skill
     public override int Damage { get => 10; set => base.Damage = value; }
     public override int Cost { get => 1; set => base.Cost = value; }
     [SerializeField] private GameObject effectPrefab;
+    [SerializeField] private Vector3 skillOffset;
     public override GameObject EffectPrefab { get => effectPrefab; set => base.EffectPrefab = value; }
 
     public override void SkillActivation(GameObject user, GameObject[] targets)
     {
         user.GetComponent<Unit>().animator.SetTrigger("LightAttack");
+        user.GetComponent<Unit>().currentActionPoints -= Cost;
         if (effectPrefab != null)
         {
             Transform VFXSpawnPoint = user.transform.Find("VFX").transform;
-            GameObject fireball = Instantiate(effectPrefab,VFXSpawnPoint.position , quaternion.identity);
-            fireball.GetComponent<Projectile>().SetProjectileProperties(Damage, Vector2.right, false);
+            user.GetComponent<Unit>().ProjectileSpawn(user, VFXSpawnPoint, effectPrefab, Damage, Vector2.right, false, 0.9f,skillOffset);
+            user.GetComponent<Unit>().currentActionPoints -= Cost;
         }
     }
+
+    public override int GetCost()
+    {
+        return Cost;
+    }
+
 }

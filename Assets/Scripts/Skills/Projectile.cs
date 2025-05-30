@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public Vector2 direction = Vector2.right;
     public int damage;
     public bool stuneffect;
+    public float destroyDelay;
 
     void Update()
     {
@@ -20,6 +21,7 @@ public class Projectile : MonoBehaviour
         {
             other.GetComponent<Unit>().TakeDamage(damage, stuneffect);
             Debug.Log("Hit");
+            Destroy(gameObject,destroyDelay);
         }
     }
     public void SetProjectileProperties(int projectiledamage, Vector2 projectiledirection, bool WillStunEffect)

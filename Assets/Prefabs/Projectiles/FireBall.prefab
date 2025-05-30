@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 171626496127883401}
   - component: {fileID: -5699967748011942400}
   m_Layer: 7
-  m_Name: FireBall
-  m_TagString: Untagged
+  m_Name: Fireball
+  m_TagString: AllySkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9abb6bcfa05324588bb26c4d9874cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
   direction: {x: 1, y: 0}
-  damage: 0
+  damage: 10
   stuneffect: 0

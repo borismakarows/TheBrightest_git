@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -41,10 +42,10 @@ public class TB_BattleManager : MonoBehaviour
             }
         }
         for (int i = 0; i < PlayerActors.Count; i++)
-            {
-                GameObject[] playerTeamArray = PlayerActors.OrderByDescending(u => u.GetComponent<Unit>().currentUnitData.positionIndex).ToArray();
-                GameObject player = Instantiate(playerTeamArray[i], playerSpawnPoints[i].position, Quaternion.identity);
-                // check data and load for ally
+        {
+            GameObject[] playerTeamArray = PlayerActors.OrderByDescending(u => u.GetComponent<Unit>().currentUnitData.positionIndex).ToArray();
+            GameObject player = Instantiate(playerTeamArray[i], playerSpawnPoints[i].position, Quaternion.identity);
+            // check data and load for ally
             foreach (Unit.UnitData unitdata in StoredUnitData)
             {
                 if (player.GetComponent<Unit>().currentUnitData.id == unitdata.id)
@@ -52,8 +53,8 @@ public class TB_BattleManager : MonoBehaviour
                     player.GetComponent<Unit>().currentUnitData = unitdata;
                 }
             }
-                allUnits.Add(player.GetComponent<Unit>());
-            }
+            allUnits.Add(player.GetComponent<Unit>());
+        }
         for (int i = 0; i < enemyActors.Count; i++)
         {
             {
@@ -71,7 +72,7 @@ public class TB_BattleManager : MonoBehaviour
 
         if (playerAdvantege)
         {
-           // Debug.Log("Suprise Attack");
+            // Debug.Log("Suprise Attack");
             var playerUnits = aliveUnits
                 .Where(unit => unit.actorTeamType == Unit.TeamType.Ally)
                 .OrderByDescending(unit => unit.speed);
@@ -101,10 +102,10 @@ public class TB_BattleManager : MonoBehaviour
                 turnQueue.Enqueue(unit);
             }
         }
-        
+
         //foreach (var unit in turnQueue)
         //{
-          //  Debug.Log(unit.name);
+        //  Debug.Log(unit.name);
         //}
     }
 
@@ -141,13 +142,15 @@ public class TB_BattleManager : MonoBehaviour
             currentGameState = GameStates.RealTime;
         }
         Unit current = turnQueue.Dequeue();
-        Debug.Log(current.name+ "'s Turn");
-        
+        Debug.Log(current.name + "'s Turn");
+
         if (current.actorTeamType == Unit.TeamType.Ally)
         {
             foreach (Button skillButton in UI_Manager.Instance.B_Skills)
             {
-                skillButton.gameObject.SetActive(true);
+                CloseGuard(current);
+                skillButton.onClick.RemoveAllListeners();
+                current.currentActionPoints += 1;
                 skillButton.onClick.AddListener(() => AllySkillUse(skillButton, current));
             }
         }
@@ -160,31 +163,69 @@ public class TB_BattleManager : MonoBehaviour
         }
         turnQueue.Enqueue(current);
     }
- 
+
     public void AllySkillUse(Button skillButton, Unit current)
     {
+        skillButton.onClick.RemoveAllListeners();
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy").ToArray();
-        Debug.Log(targets[0]);
         switch (skillButton.name)
         {
             case "B_Attack":
-                current.LightAttack.SkillActivation(current.gameObject, targets);
-                NextTurn();
+                if (CheckCost(current.LightAttack, current))
+                {
+                    skillButton.gameObject.SetActive(true);
+                    current.LightAttack.SkillActivation(current.gameObject, targets);
+                    NextTurn();
+                }
+                else { Debug.Log("not enough action points"); }
                 break;
             case "B_Special":
-                current.Special.SkillActivation(current.gameObject, targets);
-                NextTurn();
+                if (CheckCost(current.Special, current))
+                {
+                    skillButton.gameObject.SetActive(true);
+                    current.Special.SkillActivation(current.gameObject, targets);
+                    NextTurn();
+                }
+                else { Debug.Log("not enough action points"); }
                 break;
             case "B_Defence":
-                current.Defence.SkillActivation(current.gameObject, targets);
-                NextTurn();
+                if (CheckCost(current.Defence, current))
+                {
+                    skillButton.gameObject.SetActive(true);
+                    current.Defence.SkillActivation(current.gameObject, targets);
+                    NextTurn();
+                }
+                else { Debug.Log("not enough action points"); }
                 break;
             case "B_Rest":
-                current.Rest.SkillActivation(current.gameObject, targets);
-                NextTurn();
+                if (CheckCost(current.Rest, current))
+                {
+                    skillButton.gameObject.SetActive(true);
+                    current.Rest.SkillActivation(current.gameObject, targets);
+                    NextTurn();
+                }
+                else { Debug.Log("not enough action points"); }
                 break;
         }
     }
 
+    private bool CheckCost(Skill skill, Unit current)
+    {
+        bool canUseSkill = false;
+        if (skill.GetCost() < current.currentActionPoints)
+        {
+            canUseSkill = true;
+        }
+        return canUseSkill;
+    }
+
+    private void CloseGuard(Unit current)
+    {
+        if (current.isGuarded)
+        {
+            current.isGuarded = false;
+            current.GetComponent<Animator>().SetBool("Defence", false);
+        }
+    }
 }
 

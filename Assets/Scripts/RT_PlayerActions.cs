@@ -108,6 +108,7 @@ public class RT_PlayerActions : MonoBehaviour
         yield return new WaitForSeconds(Seconds);
         playerAdvantage = true;
         battleManager.StartBattle(playerAdvantage, team, hitenemy.GetComponent<Enemy>().team);
+        Destroy(hitenemy);
         CameraController.Instance.MoveToBattle(transform);
         UI_Manager.Instance.SetSkillButtonsActive(battleManager.currentGameState == TB_BattleManager.GameStates.TurnBased);
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7165102246960300701}
   m_Layer: 0
-  m_Name: VFXSPAWNPoint
+  m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3384976966276943122}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.293, y: 0.143, z: -9.885369}
+  m_LocalPosition: {x: 0.293, y: 0.143, z: 1}
   m_LocalScale: {x: 0.8733625, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 3975225314105294235}
   m_Layer: 7
   m_Name: FireWizard
-  m_TagString: Player
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,8 +112,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1304118683
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4723107735738678597, guid: a80446c1d4ed12845b8c1ce200c3d054, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -171,11 +171,11 @@ MonoBehaviour:
   Defence: {fileID: 11400000, guid: a982d43c8242cff46ab61a80144ba5e7, type: 2}
   Rest: {fileID: 11400000, guid: 8fdff1ef05775cb4ca2c2b87cee5f1ab, type: 2}
   maxActionPoints: 5
-  currentActionPoints: 0
-  unitName: Player
+  unitName: FireWizard
   maxHP: 100
   speed: 20
   unitIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  staticSkillSpawnPoint: {fileID: 0}
   currentUnitData:
     id: 1
     currentHP: 100

@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.564128, y: -2.8916402, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3020847949005219374}
@@ -81,12 +81,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8019239915147560276, guid: 1608ff1752edc054ba257ffef7026f89, type: 3}
+  m_Sprite: {fileID: 4723107735738678597, guid: 42d67bd72fb04c14a912800e2c2897f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.46, y: 0.71}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -153,8 +153,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.21, y: 0.36}
+  m_Offset: {x: -0.06494571, y: 0.000000066227386}
+  m_Size: {x: 0.3398914, y: 0.71125895}
   m_Direction: 0
 --- !u!114 &-3121411878292573827
 MonoBehaviour:
@@ -169,21 +169,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actorTeamType: 0
-  LightAttack: {fileID: 11400000, guid: c5a78720174107946acdf6231ca53b64, type: 2}
-  Special: {fileID: 11400000, guid: fefa0805abead2041a1ad735fdaf46cc, type: 2}
+  LightAttack: {fileID: 11400000, guid: 0c95c3edd666f0148a82d720fa46eeb3, type: 2}
+  Special: {fileID: 11400000, guid: 0722543e9618ca84288b8912ce0894b1, type: 2}
   Defence: {fileID: 11400000, guid: a982d43c8242cff46ab61a80144ba5e7, type: 2}
   Rest: {fileID: 11400000, guid: 8fdff1ef05775cb4ca2c2b87cee5f1ab, type: 2}
-  ChangePosition: {fileID: 0}
   maxActionPoints: 10
-  unitName: Player
+  unitName: Gangster
   maxHP: 100
   speed: 15
   unitIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  staticSkillSpawnPoint: {fileID: 0}
   currentUnitData:
     id: 2
     currentHP: 100
-    currentActionPoints: 1
     positionIndex: 0
+  animator: {fileID: 0}
 --- !u!95 &-2638534755926989453
 Animator:
   serializedVersion: 7
@@ -194,7 +194,7 @@ Animator:
   m_GameObject: {fileID: 6707427759093747709}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d832e95fd0813ad43b8bdf532a17bb0a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 00d374632991dcc4a9f82a989efcd27f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

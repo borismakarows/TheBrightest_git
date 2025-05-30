@@ -26,7 +26,9 @@ public abstract class Skill : ScriptableObject
     public virtual int Cost { get; set; }
     public virtual int Damage { get; set; }
     public virtual GameObject EffectPrefab { get; set; }
- 
+
     public abstract void SkillActivation(GameObject user, GameObject[] targets);
 
+    public abstract int GetCost();
+    
 }
