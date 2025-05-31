@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 559551815460730836}
   - component: {fileID: 2756968728853955176}
   - component: {fileID: 3783967215542572017}
-  - component: {fileID: 8003240851826738862}
   - component: {fileID: 8645510395991665907}
-  - component: {fileID: 5922817377100661383}
-  - component: {fileID: -4613979049417181342}
+  - component: {fileID: -1941538707764334656}
+  - component: {fileID: 1511784038622044171}
+  - component: {fileID: 3579556038619792482}
   m_Layer: 6
-  m_Name: Enemy 1
+  m_Name: Evil Wizard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ RectTransform:
   m_GameObject: {fileID: 8408641988891616582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,9 +85,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 815424164945274260, guid: 563878f8078ee244cba0078efc635cd7, type: 3}
-  m_Color: {r: 0.990566, g: 0.990566, b: 0.990566, a: 1}
-  m_FlipX: 0
+  m_Sprite: {fileID: 4723107735738678597, guid: 68765eb28138501468a968ec981ec50a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -108,9 +108,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -121,10 +121,77 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &8003240851826738862
-BoxCollider2D:
+--- !u!114 &8645510395991665907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408641988891616582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c359fe5d41b5414c92b2a62d1d6cea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actorTeamType: 1
+  LightAttack: {fileID: 0}
+  Special: {fileID: 0}
+  Defence: {fileID: 0}
+  Rest: {fileID: 0}
+  maxActionPoints: 1
+  unitName: Evil Wizard
+  maxHP: 100
+  speed: 5
+  unitIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  isGuarded: 0
+  staticSkillSpawnPoint: {fileID: 0}
+  currentUnitData:
+    id: 0
+    currentHP: 100
+    positionIndex: 0
+  guardReduction: 0
+  animator: {fileID: 0}
+--- !u!114 &-1941538707764334656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408641988891616582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74a905ba1b316840be29aadb67ea45d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team:
+  - {fileID: 8408641988891616582, guid: c7e0ceb62c793bc468c1e065801c0c45, type: 3}
+  - {fileID: 8408641988891616582, guid: 9fa3f4a591bc6f74bbaeed55dba5bcb4, type: 3}
+--- !u!95 &1511784038622044171
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408641988891616582}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb06ff003cdb61d428880fd9fa2520e4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &3579556038619792482
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -158,80 +225,5 @@ BoxCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.82, y: 0.61}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &8645510395991665907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8408641988891616582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c359fe5d41b5414c92b2a62d1d6cea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actorTeamType: 1
-  LightAttack: {fileID: 0}
-  Special: {fileID: 0}
-  Defence: {fileID: 0}
-  Rest: {fileID: 0}
-  maxActionPoints: 1
-  unitName: Slime
-  maxHP: 100
-  speed: 3
-  unitIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  isGuarded: 0
-  staticSkillSpawnPoint: {fileID: 0}
-  currentUnitData:
-    id: 0
-    currentHP: 100
-    positionIndex: 0
-  guardReduction: 0
-  animator: {fileID: 0}
---- !u!114 &5922817377100661383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8408641988891616582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e74a905ba1b316840be29aadb67ea45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  team:
-  - {fileID: 0}
---- !u!95 &-4613979049417181342
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8408641988891616582}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3855062d1b4aba845b9e77665f9dfde2, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_Size: {x: 0.35, y: 0.55}
+  m_Direction: 0

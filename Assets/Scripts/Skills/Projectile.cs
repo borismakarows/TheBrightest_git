@@ -19,9 +19,9 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Unit>().TakeDamage(damage, stuneffect);
-            Debug.Log("Hit");
-            Destroy(gameObject,destroyDelay);
+            GetComponent<CircleCollider2D>().enabled = false;
+            other.GetComponent<Unit>().TakeDamage(damage, stuneffect, 0f);
+            Destroy(gameObject, destroyDelay);  
         }
     }
     public void SetProjectileProperties(int projectiledamage, Vector2 projectiledirection, bool WillStunEffect)

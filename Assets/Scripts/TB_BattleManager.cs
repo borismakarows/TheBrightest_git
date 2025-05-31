@@ -151,7 +151,7 @@ public class TB_BattleManager : MonoBehaviour
                 CloseGuard(current);
                 skillButton.onClick.RemoveAllListeners();
                 current.currentActionPoints += 1;
-                skillButton.onClick.AddListener(() => AllySkillUse(skillButton, current));
+                skillButton.onClick.AddListener(() => AllySkillUse(skillButton, current, aliveEnemies));
             }
         }
         else
@@ -164,49 +164,53 @@ public class TB_BattleManager : MonoBehaviour
         turnQueue.Enqueue(current);
     }
 
-    public void AllySkillUse(Button skillButton, Unit current)
+    public void AllySkillUse(Button skillButton, Unit current, List<Unit> targetUnits)
     {
         skillButton.onClick.RemoveAllListeners();
-        GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy").ToArray();
-        switch (skillButton.name)
+        List<GameObject> targets = new List<GameObject>();
+        foreach (Unit targetUnit in targetUnits)
         {
-            case "B_Attack":
-                if (CheckCost(current.LightAttack, current))
-                {
-                    skillButton.gameObject.SetActive(true);
-                    current.LightAttack.SkillActivation(current.gameObject, targets);
-                    NextTurn();
-                }
-                else { Debug.Log("not enough action points"); }
-                break;
-            case "B_Special":
-                if (CheckCost(current.Special, current))
-                {
-                    skillButton.gameObject.SetActive(true);
-                    current.Special.SkillActivation(current.gameObject, targets);
-                    NextTurn();
-                }
-                else { Debug.Log("not enough action points"); }
-                break;
-            case "B_Defence":
-                if (CheckCost(current.Defence, current))
-                {
-                    skillButton.gameObject.SetActive(true);
-                    current.Defence.SkillActivation(current.gameObject, targets);
-                    NextTurn();
-                }
-                else { Debug.Log("not enough action points"); }
-                break;
-            case "B_Rest":
-                if (CheckCost(current.Rest, current))
-                {
-                    skillButton.gameObject.SetActive(true);
-                    current.Rest.SkillActivation(current.gameObject, targets);
-                    NextTurn();
-                }
-                else { Debug.Log("not enough action points"); }
-                break;
+            targets.Add(targetUnit.gameObject);
         }
+        switch (skillButton.name)
+            {
+                case "B_Attack":
+                    if (CheckCost(current.LightAttack, current))
+                    {
+                        skillButton.gameObject.SetActive(true);
+                        current.LightAttack.SkillActivation(current.gameObject, targets.ToArray());
+                        NextTurn();
+                    }
+                    else { Debug.Log("not enough action points"); }
+                    break;
+                case "B_Special":
+                    if (CheckCost(current.Special, current))
+                    {
+                        skillButton.gameObject.SetActive(true);
+                        current.Special.SkillActivation(current.gameObject, targets.ToArray());
+                        NextTurn();
+                    }
+                    else { Debug.Log("not enough action points"); }
+                    break;
+                case "B_Defence":
+                    if (CheckCost(current.Defence, current))
+                    {
+                        skillButton.gameObject.SetActive(true);
+                        current.Defence.SkillActivation(current.gameObject, targets.ToArray());
+                        NextTurn();
+                    }
+                    else { Debug.Log("not enough action points"); }
+                    break;
+                case "B_Rest":
+                    if (CheckCost(current.Rest, current))
+                    {
+                        skillButton.gameObject.SetActive(true);
+                        current.Rest.SkillActivation(current.gameObject, targets.ToArray());
+                        NextTurn();
+                    }
+                    else { Debug.Log("not enough action points"); }
+                    break;
+            }
     }
 
     private bool CheckCost(Skill skill, Unit current)

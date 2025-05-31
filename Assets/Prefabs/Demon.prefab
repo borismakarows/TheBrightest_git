@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3783967215542572017}
   - component: {fileID: 8003240851826738862}
   - component: {fileID: 8645510395991665907}
-  - component: {fileID: -1941538707764334656}
+  - component: {fileID: -4613979049417181342}
   m_Layer: 6
-  m_Name: MainEnemy
+  m_Name: Demon
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 8408641988891616582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,8 +84,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 815424164945274260, guid: 563878f8078ee244cba0078efc635cd7, type: 3}
+  m_Color: {r: 0.990566, g: 0.990566, b: 0.990566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -160,7 +160,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.82, y: 0.61}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -186,28 +186,37 @@ MonoBehaviour:
   Defence: {fileID: 0}
   Rest: {fileID: 0}
   maxActionPoints: 1
-  currentActionPoints: 0
-  unitName: Slime
+  unitName: Demon
   maxHP: 100
-  speed: 5
+  speed: 3
   unitIcon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  isGuarded: 0
+  staticSkillSpawnPoint: {fileID: 0}
   currentUnitData:
     id: 0
     currentHP: 100
     positionIndex: 0
+  guardReduction: 0
   animator: {fileID: 0}
---- !u!114 &-1941538707764334656
-MonoBehaviour:
+--- !u!95 &-4613979049417181342
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8408641988891616582}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e74a905ba1b316840be29aadb67ea45d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  team:
-  - {fileID: 8408641988891616582, guid: c7e0ceb62c793bc468c1e065801c0c45, type: 3}
-  - {fileID: 8408641988891616582, guid: 9fa3f4a591bc6f74bbaeed55dba5bcb4, type: 3}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3855062d1b4aba845b9e77665f9dfde2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

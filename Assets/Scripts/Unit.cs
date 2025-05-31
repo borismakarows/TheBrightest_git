@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Numerics;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
@@ -53,7 +54,7 @@ public class Unit : MonoBehaviour
         staticSkillSpawnPoint = GameObject.Find("Middle Spawn Point").transform;
     }
 
-    public void TakeDamage(int damage, bool stun)
+    public void TakeDamage(int damage, bool stun, float hurtDelay)
     {
         if (isGuarded)
         {
@@ -61,16 +62,23 @@ public class Unit : MonoBehaviour
             damage -= guardReduction;
             damage = Mathf.Clamp(damage, 0, 100);
         }
-        currentUnitData.currentHP -= damage;
-        isStunned = stun;
         if (currentUnitData.currentHP < 0)
         {
             isAlive = false;
             currentUnitData.currentHP = 0;
             Debug.Log($"{unitName} has died.");
         }
+        if (damage > 0)
+        { StartCoroutine(TriggerAnimationwithDelay("Hurt", hurtDelay)); }
+        currentUnitData.currentHP -= damage;
+        isStunned = stun;
     }
 
+    private IEnumerator TriggerAnimationwithDelay(string triggerName, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        animator.SetTrigger(triggerName);
+    }
     public bool IsAlive()
     {
         return isAlive;
@@ -128,17 +136,20 @@ public class Unit : MonoBehaviour
 
     public GameObject FindClosestTarget(GameObject user, GameObject[] targets)
     {
-        GameObject closestTarget = targets[0];
-        float distance = 5000000;
+        GameObject closestTarget = null;
+        float distance = float.MaxValue;
         foreach (GameObject target in targets)
         {
-            if (Vector2.Distance(target.transform.position, user.transform.position) < distance)
+            float currentDistance = Vector2.Distance(target.transform.position, user.transform.position);
+            if (currentDistance < distance)
             {
                 distance = Vector2.Distance(target.transform.position, user.transform.position);
                 closestTarget = target;
             }
         }
-        Debug.Log("Closest Target: " + closestTarget.name);
+        if (closestTarget != null)
+        {Debug.Log("Closest Target: " + closestTarget.name);}
+        else { Debug.Log("No Target found"); }
         return closestTarget;
     }
 
@@ -175,7 +186,7 @@ public class Unit : MonoBehaviour
             foreach (GameObject target in targets)
             {
                 Unit targetUnit = target.GetComponent<Unit>();
-                float LifestealAmount = targetUnit.currentUnitData.currentHP / lifeStealRatio;
+                float LifestealAmount = targetUnit.currentUnitData.currentHP / lifeStealRatio /100f;
                 targetUnit.currentUnitData.currentHP -= LifestealAmount;
                 Heal(LifestealAmount);
             }
