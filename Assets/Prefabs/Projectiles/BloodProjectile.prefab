@@ -160,7 +160,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9abb6bcfa05324588bb26c4d9874cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 5
   direction: {x: 1, y: 0}
   damage: 5
   stuneffect: 0
+  destroyDelay: 0
+  shouldDamage: 1
+  shouldExplode: 0
+  targetTag: Enemy
+  explosionPrefab: {fileID: 0}
+  explosionDestroyDelay: 0

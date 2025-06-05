@@ -1,5 +1,4 @@
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.ShaderGraph.Internal;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -9,6 +8,11 @@ public class Projectile : MonoBehaviour
     public int damage;
     public bool stuneffect;
     public float destroyDelay;
+    public bool shouldDamage;
+    public bool shouldExplode;
+    public string targetTag;
+    public GameObject explosionPrefab;
+    [SerializeField] float explosionDestroyDelay;
 
     void Update()
     {
@@ -17,11 +21,31 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        string skillTag = targetTag + "Skill";
+        if (other.CompareTag(targetTag))
         {
             GetComponent<CircleCollider2D>().enabled = false;
-            other.GetComponent<Unit>().TakeDamage(damage, stuneffect, 0f);
-            Destroy(gameObject, destroyDelay);  
+            if (shouldDamage)
+            {
+                if (other.GetComponent<Unit>() != null)
+                { other.GetComponent<Unit>().TakeDamage(damage, stuneffect, 0f); }
+                if (shouldExplode)
+                {
+                    explosionPrefab = Instantiate(explosionPrefab, transform.position, quaternion.identity);
+                    Destroy(explosionPrefab, explosionDestroyDelay);
+                }
+            }
+            Destroy(gameObject, destroyDelay);
+        }
+        else if (other.CompareTag(skillTag))
+        {
+            if (shouldExplode)
+            {
+                explosionPrefab = Instantiate(explosionPrefab, transform.position, quaternion.identity);
+                Destroy(explosionPrefab, explosionDestroyDelay);
+            }
+            Destroy(gameObject);
+            Destroy(other.gameObject, explosionDestroyDelay);
         }
     }
     public void SetProjectileProperties(int projectiledamage, Vector2 projectiledirection, bool WillStunEffect)

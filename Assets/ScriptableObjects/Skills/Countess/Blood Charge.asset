@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2890f4e9e1555448b3c08111986fce7, type: 3}
   m_Name: Blood Charge
   m_EditorClassIdentifier: 
-  lifeStealRatio: 2
+  lifeStealRatio: 1
   effectPrefab: {fileID: 1003342424005222218, guid: a24f83bf30001084bad58709e6b41c11, type: 3}
+  skillOffset: {x: 0, y: 0, z: 0}

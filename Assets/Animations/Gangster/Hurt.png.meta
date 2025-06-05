@@ -1,28 +1,28 @@
 fileFormatVersion: 2
-guid: 3da6a6041a069344cad8a56960a230e1
+guid: 79727f8ab2397f7439177e8f36ec5096
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2887184577470883374
-    second: Explode_0
+      213: -2048800907179887802
+    second: Hurt_0
   - first:
-      213: 8288982013464879355
-    second: Explode_1
+      213: 490842205202310979
+    second: Hurt_1
   - first:
-      213: -4085701817799866075
-    second: Explode_2
+      213: -3720053754089064719
+    second: Hurt_2
   - first:
-      213: -5964474748036044434
-    second: Explode_3
+      213: 5649970053243570431
+    second: Hurt_3
   - first:
-      213: 1990628112201042793
-    second: Explode_4
+      213: -371187646486735994
+    second: Hurt_4
   - first:
-      213: -3628878560167924253
-    second: Explode_5
+      213: 1177448812329152706
+    second: Hurt_5
   - first:
-      213: 7567364251426146524
-    second: Explode_6
+      213: 7933592967420663305
+    second: Hurt_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -131,155 +131,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Explode_0
+      name: Hurt_0
       rect:
         serializedVersion: 2
-        x: 121
-        y: 19
-        width: 12
-        height: 12
+        x: 43
+        y: 0
+        width: 46
+        height: 71
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2d99cda7ce8aee7d0800000000000000
-      internalID: -2887184577470883374
+      spriteID: 6437b001e623193e0800000000000000
+      internalID: -2048800907179887802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explode_1
+      name: Hurt_1
       rect:
         serializedVersion: 2
-        x: 165
-        y: 12
-        width: 28
-        height: 28
+        x: 171
+        y: 0
+        width: 46
+        height: 71
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bf02d2e6931680370800000000000000
-      internalID: 8288982013464879355
+      spriteID: 3476ad19262dfc600800000000000000
+      internalID: 490842205202310979
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explode_2
+      name: Hurt_2
       rect:
         serializedVersion: 2
-        x: 210
-        y: 7
-        width: 25
-        height: 28
+        x: 298
+        y: 0
+        width: 46
+        height: 71
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5290fdbf7dbac47c0800000000000000
-      internalID: -4085701817799866075
+      spriteID: 1f6b92202d6bf5cc0800000000000000
+      internalID: -3720053754089064719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explode_3
+      name: Hurt_3
       rect:
         serializedVersion: 2
-        x: 212
-        y: 31
-        width: 6
-        height: 6
+        x: 421
+        y: 0
+        width: 50
+        height: 71
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e69268b51dde93da0800000000000000
-      internalID: -5964474748036044434
+      spriteID: ff88d2f14d9b86e40800000000000000
+      internalID: 5649970053243570431
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Explode_4
+      name: Hurt_5
       rect:
         serializedVersion: 2
-        x: 232
-        y: 1
-        width: 108
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 537
+        y: 0
+        width: 63
+        height: 71
+      alignment: 9
+      pivot: {x: 0.5949174, y: 0.48315576}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 96b46a3a8b120ab10800000000000000
-      internalID: 1990628112201042793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Explode_5
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 19
-        width: 11
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3ede8281d22a3adc0800000000000000
-      internalID: -3628878560167924253
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Explode_6
-      rect:
-        serializedVersion: 2
-        x: 74
-        y: 21
-        width: 7
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cd8ce3c61bda40960800000000000000
-      internalID: 7567364251426146524
+      spriteID: 2c0b518d473275010800000000000000
+      internalID: 1177448812329152706
       vertices: []
       indices: 
       edges: []
@@ -288,7 +244,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d9317d9714d7ef948b3c37a325a30737
     internalID: 0
     vertices: []
     indices: 
@@ -297,7 +253,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hurt_0: -2048800907179887802
+      Hurt_1: 490842205202310979
+      Hurt_2: -3720053754089064719
+      Hurt_3: 5649970053243570431
+      Hurt_5: 1177448812329152706
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

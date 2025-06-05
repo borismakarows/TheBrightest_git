@@ -165,3 +165,5 @@ MonoBehaviour:
   damage: 5
   stuneffect: 0
   destroyDelay: 5
+  shouldDamage: 1
+  targetTag: Enemy

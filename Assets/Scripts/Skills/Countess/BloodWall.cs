@@ -15,6 +15,7 @@ public class BloodWall : Skill
     private Transform spawnPos;
     private GameObject[] Bloods = new GameObject[3];
     public Vector3 skillOffset;
+    public override float skillDuration { get => 2f; set => base.skillDuration = value; }
 
     public override void SkillActivation(GameObject user, GameObject[] targets)
     {

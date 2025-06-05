@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6707427759093747709}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.564128, y: -2.8916402, z: 0}
+  m_LocalPosition: {x: -4.564128, y: -2.8916402, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -171,19 +171,24 @@ MonoBehaviour:
   actorTeamType: 0
   LightAttack: {fileID: 11400000, guid: 0c95c3edd666f0148a82d720fa46eeb3, type: 2}
   Special: {fileID: 11400000, guid: 0722543e9618ca84288b8912ce0894b1, type: 2}
-  Defence: {fileID: 11400000, guid: a982d43c8242cff46ab61a80144ba5e7, type: 2}
+  Defence: {fileID: 11400000, guid: 07aeeaa4388414b48b29e5032d9483d7, type: 2}
   Rest: {fileID: 11400000, guid: 8fdff1ef05775cb4ca2c2b87cee5f1ab, type: 2}
   maxActionPoints: 10
+  currentActionPoints: 1
   unitName: Gangster
   maxHP: 100
   speed: 15
   unitIcon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  isGuarded: 0
+  deathDelayOffset: 0
   staticSkillSpawnPoint: {fileID: 0}
   currentUnitData:
     id: 2
     currentHP: 100
-    positionIndex: 0
+    positionIndex: 5
+  guardReduction: 0
   animator: {fileID: 0}
+  damageTextPrefab: {fileID: 6187404134583243814, guid: 5b2788db68da3e34caf2ce0ba1f9e103, type: 3}
 --- !u!95 &-2638534755926989453
 Animator:
   serializedVersion: 7
@@ -231,7 +236,7 @@ Transform:
   m_GameObject: {fileID: 9021513058114432991}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.047, y: -0.024, z: 0.06935124}
+  m_LocalPosition: {x: 0.388, y: -0.024, z: 0.06935124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

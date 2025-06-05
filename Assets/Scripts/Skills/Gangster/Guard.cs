@@ -15,18 +15,14 @@ public class Guard : Skill
 
     public override void SkillActivation(GameObject user, GameObject[] targets)
     {
+        user.GetComponent<Unit>().currentActionPoints -= Cost;
         if (!user.GetComponent<Unit>().isGuarded)
         {
-            user.GetComponent<Animator>().SetBool("Defence", true);
+            user.GetComponent<Unit>().isGuarded = true;
+            user.GetComponent<Animator>().SetTrigger("Defence");
             user.GetComponent<Unit>().guardReduction = Damage;
         }
-        else
-        {
-            user.GetComponent<Unit>().isGuarded = false;
-            user.GetComponent<Animator>().SetBool("Defence", false);
-        }
     }
-
 
 
     public override int GetCost()

@@ -164,3 +164,6 @@ MonoBehaviour:
   direction: {x: 1, y: 0}
   damage: 10
   stuneffect: 0
+  destroyDelay: 0
+  shouldDamage: 1
+  targetTag: Enemy

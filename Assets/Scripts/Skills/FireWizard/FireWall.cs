@@ -13,6 +13,7 @@ public class FireWall : Skill
     public override int Cost { get => 2; set => base.Cost = value; }
     [SerializeField] private GameObject _effectPrefab;
     public override GameObject EffectPrefab { get => _effectPrefab; set => base.EffectPrefab = value; }
+    public override float skillDuration { get => 3.5f; set => base.skillDuration = value; }
     private Transform spawnPos;
     private GameObject Vfx;
     public Vector3 skillOffset;

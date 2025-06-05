@@ -1,14 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Numerics;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -24,22 +17,25 @@ public class Unit : MonoBehaviour
     public Skill Rest;
     //Stats
     [SerializeField] int maxActionPoints;
-    public int currentActionPoints { get; set; }
-    [SerializeField] string unitName;
+    public int currentActionPoints;
+    public string unitName;
     [SerializeField] int maxHP;
     public int speed;
     [SerializeField] Sprite unitIcon;
     private bool isAlive = true;
     [HideInInspector] bool isStunned;
     [HideInInspector] public bool isGuarded;
+    public float deathDelayOffset;
     public Transform staticSkillSpawnPoint;
     public UnitData currentUnitData;
     [HideInInspector] public int guardReduction;
     // Coroutines
     private Coroutine moveCoroutine;
     private Coroutine ProjectileSpawnCoroutine;
+    //Components
     [HideInInspector] public Animator animator;
-
+    public GameObject damageTextPrefab;
+    
     [System.Serializable]
     public class UnitData
     {
@@ -56,28 +52,50 @@ public class Unit : MonoBehaviour
 
     public void TakeDamage(int damage, bool stun, float hurtDelay)
     {
+        isStunned = stun;
         if (isGuarded)
         {
             isGuarded = false;
             damage -= guardReduction;
             damage = Mathf.Clamp(damage, 0, 100);
         }
-        if (currentUnitData.currentHP < 0)
+        if (currentUnitData.currentHP - damage < 0)
         {
             isAlive = false;
             currentUnitData.currentHP = 0;
-            Debug.Log($"{unitName} has died.");
+            StartCoroutine(DeadEvents("Death", hurtDelay, hurtDelay + deathDelayOffset));
         }
-        if (damage > 0)
-        { StartCoroutine(TriggerAnimationwithDelay("Hurt", hurtDelay)); }
+        else if (damage > 0)
+        {
+            StartCoroutine(TriggerHurtAnimationwithDelay("Hurt", hurtDelay, damage));
+        }
         currentUnitData.currentHP -= damage;
-        isStunned = stun;
+        if (actorTeamType == TeamType.Enemy)
+        { gameObject.GetComponent<Enemy>().h_slider.value = currentUnitData.currentHP / 100f; }
     }
 
-    private IEnumerator TriggerAnimationwithDelay(string triggerName, float delay)
+    private void ShowDamage(int damage, Color color)
+    {
+        float randomX = UnityEngine.Random.Range(-0.2f, 0.2f);
+        float randomY = UnityEngine.Random.Range(0.1f, 0.2f);
+        Vector3 spawnPos = transform.position + new Vector3(randomX, randomY, 0);
+        GameObject popup = Instantiate(damageTextPrefab, spawnPos, quaternion.identity);
+        popup.GetComponent<PopupDamage>().SetText(damage.ToString());
+        popup.GetComponent<PopupDamage>().ChangeColor(color);
+    }
+    private IEnumerator DeadEvents(string triggername, float hurtdelay, float delayfordisableUnit)
+    {
+        yield return new WaitForSeconds(hurtdelay);
+        animator.SetTrigger("Death");
+        yield return new WaitForSeconds(delayfordisableUnit);
+        gameObject.SetActive(false);
+    }
+
+    private IEnumerator TriggerHurtAnimationwithDelay(string triggerName, float delay, int damage)
     {
         yield return new WaitForSeconds(delay);
         animator.SetTrigger(triggerName);
+        ShowDamage(damage, Color.red);
     }
     public bool IsAlive()
     {
@@ -89,15 +107,15 @@ public class Unit : MonoBehaviour
         currentUnitData = Data;
     }
 
-    public void MoveToTarget(GameObject user, Vector2 target, float speed, string animationTrigger, float AcceptedRadius)
+    public void MoveToTarget(GameObject user, Vector2 target, float speed, string animationTrigger, float AcceptedRadius, float delayOfReturn)
     {
         Transform OriginalPosition = user.transform;
         if (moveCoroutine != null)
             user.GetComponent<MonoBehaviour>().StopCoroutine(moveCoroutine);
-        moveCoroutine = user.GetComponent<MonoBehaviour>().StartCoroutine(MoveToPosition(user, target, speed,animationTrigger,AcceptedRadius));
+        moveCoroutine = user.GetComponent<MonoBehaviour>().StartCoroutine(MoveToPosition(user, target, speed, animationTrigger, AcceptedRadius, delayOfReturn));
     }
 
-    private IEnumerator MoveToPosition(GameObject user, Vector2 target, float speed, string animationTrigger, float AcceptedRadius)
+    private IEnumerator MoveToPosition(GameObject user, Vector2 target, float speed, string animationTrigger, float AcceptedRadius, float delayOfReturn)
     {
         Vector2 OriginalPos = user.transform.position;
         Transform t = user.transform;
@@ -107,23 +125,25 @@ public class Unit : MonoBehaviour
             t.position = new Vector3(newPos.x, t.position.y, t.position.z);
             yield return null;
         }
-        if (animationTrigger != null){user.GetComponent<Unit>().animator.SetTrigger(animationTrigger);}
-        yield return new WaitForSeconds(1.5f);
+        if (animationTrigger != null) { user.GetComponent<Unit>().animator.SetTrigger(animationTrigger); }
+        yield return new WaitForSeconds(delayOfReturn);
 
-        while (Vector2.Distance(t.position, OriginalPos) > 0.1f)
+        while (Vector2.Distance(t.position, OriginalPos) > 0.01f)
         {
             t.position = Vector2.MoveTowards(t.position, OriginalPos, speed * Time.deltaTime);
             yield return null;
         }
-
     }
 
     public void ProjectileSpawn
     (GameObject user, Transform spawnPos, GameObject vfxPrefab, int Damage, Vector2 Direction, bool canStun, float delay, Vector3 skillOffset)
     {
         //if (ProjectileSpawnCoroutine != null)
-          //  user.GetComponent<MonoBehaviour>().StopCoroutine(ProjectileSpawnCoroutine);
-        ProjectileSpawnCoroutine = user.GetComponent<MonoBehaviour>().StartCoroutine(SpawnProjectileWithDelay(spawnPos, vfxPrefab, Damage, Direction, canStun, delay,skillOffset));
+        //  user.GetComponent<MonoBehaviour>().StopCoroutine(ProjectileSpawnCoroutine);
+        if (user.GetComponent<Unit>().isAlive)
+        {
+            ProjectileSpawnCoroutine = user.GetComponent<MonoBehaviour>().StartCoroutine(SpawnProjectileWithDelay(spawnPos, vfxPrefab, Damage, Direction, canStun, delay, skillOffset));
+        }
     }
 
     private IEnumerator SpawnProjectileWithDelay
@@ -137,18 +157,19 @@ public class Unit : MonoBehaviour
     public GameObject FindClosestTarget(GameObject user, GameObject[] targets)
     {
         GameObject closestTarget = null;
-        float distance = float.MaxValue;
+        float shortestDistance = float.MaxValue;
+
         foreach (GameObject target in targets)
         {
-            float currentDistance = Vector2.Distance(target.transform.position, user.transform.position);
-            if (currentDistance < distance)
+            float currentDistance = Mathf.Abs(target.transform.position.x - user.transform.position.x);
+            if (currentDistance < shortestDistance)
             {
-                distance = Vector2.Distance(target.transform.position, user.transform.position);
+                shortestDistance = currentDistance;
                 closestTarget = target;
             }
         }
         if (closestTarget != null)
-        {Debug.Log("Closest Target: " + closestTarget.name);}
+        { Debug.Log("Closest Target: " + closestTarget.name); }
         else { Debug.Log("No Target found"); }
         return closestTarget;
     }
@@ -166,7 +187,10 @@ public class Unit : MonoBehaviour
         {
             currentUnitData.currentHP = maxHP;
         }
-        else { currentUnitData.currentHP += healAmount; }
+        else
+        {
+            currentUnitData.currentHP += Mathf.CeilToInt(healAmount);
+        }
     }
     public void LifeSteal(GameObject user, GameObject[] targets, float lifeStealRatio, bool AOE)
     {
@@ -176,9 +200,10 @@ public class Unit : MonoBehaviour
             if (target != null)
             {
                 Unit targetUnit = target.GetComponent<Unit>();
-                float LifestealAmount = targetUnit.currentUnitData.currentHP / lifeStealRatio;
+                float LifestealAmount = targetUnit.currentUnitData.currentHP / lifeStealRatio / 100f;
                 targetUnit.currentUnitData.currentHP -= LifestealAmount;
-                Heal(LifestealAmount);
+                ShowDamage(Mathf.CeilToInt(LifestealAmount), Color.green);
+                Heal(Mathf.CeilToInt(LifestealAmount));
             }
         }
         else
@@ -186,12 +211,20 @@ public class Unit : MonoBehaviour
             foreach (GameObject target in targets)
             {
                 Unit targetUnit = target.GetComponent<Unit>();
-                float LifestealAmount = targetUnit.currentUnitData.currentHP / lifeStealRatio /100f;
+                float LifestealAmount = targetUnit.currentUnitData.currentHP / lifeStealRatio / 100f;
                 targetUnit.currentUnitData.currentHP -= LifestealAmount;
+                ShowDamage(Mathf.CeilToInt(LifestealAmount), Color.green);
                 Heal(LifestealAmount);
             }
         }
-        
+
     }
 
+    public void DamageAllEnemies(int damage, GameObject[] targets, float hurtDelay)
+    {
+        foreach (GameObject target in targets)
+        {
+            target.GetComponent<Unit>().TakeDamage(damage, false, hurtDelay);
+        }
+    }
 }

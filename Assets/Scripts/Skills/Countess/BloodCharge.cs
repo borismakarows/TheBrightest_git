@@ -14,6 +14,7 @@ public class BloodCharge : Skill
     [SerializeField] private GameObject effectPrefab;
     [SerializeField] private Vector3 skillOffset;
     public override GameObject EffectPrefab { get => effectPrefab; set => base.EffectPrefab = value; }
+    public override float skillDuration { get => 4f; set => base.skillDuration = value; }
 
     public override void SkillActivation(GameObject user, GameObject[] targets)
     {
@@ -21,10 +22,10 @@ public class BloodCharge : Skill
         {
             Debug.Log("Blooodddd!!!");
             Transform VFXSpawnPoint = user.transform.Find("VFX").transform;
-            user.GetComponent<Unit>().ProjectileSpawn(user, VFXSpawnPoint, effectPrefab, Damage, Vector2.right, false, 0.7f,skillOffset);
+            user.GetComponent<Unit>().ProjectileSpawn(user, VFXSpawnPoint, effectPrefab, Damage, Vector2.right, false, 0.7f, skillOffset);
             user.GetComponent<Unit>().currentActionPoints -= Cost;
         }
-        user.GetComponent<Unit>().LifeSteal(user, targets, lifeStealRatio,false);
+        user.GetComponent<Unit>().LifeSteal(user, targets, lifeStealRatio, false);
         user.GetComponent<Animator>().SetTrigger("LightAttack");
     }
 

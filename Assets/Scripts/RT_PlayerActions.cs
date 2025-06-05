@@ -11,6 +11,7 @@ public class RT_PlayerActions : MonoBehaviour
     [SerializeField] float attackRange = 0.5f;
     [SerializeField] float delayToBattleArena = 1f;
     [HideInInspector] public bool playerAdvantage;
+    [SerializeField] float screenFreezeDelay;
 
     //Components
     [HideInInspector] public SpriteRenderer sprite;
@@ -73,7 +74,7 @@ public class RT_PlayerActions : MonoBehaviour
             animator.SetTrigger("IsAttacking");
             if (hitenemy != null && hitenemy != gameObject)
             {
-                StartCoroutine(DelayedTeleportToBattleArea(delayToBattleArena, hitenemy));
+                StartCoroutine(DelayedTeleportToBattleArea(delayToBattleArena, hitenemy, screenFreezeDelay));
             }
         }
     }
@@ -102,14 +103,19 @@ public class RT_PlayerActions : MonoBehaviour
         }
     }
 
-    IEnumerator DelayedTeleportToBattleArea(float Seconds, Collider2D hitenemy)
+    IEnumerator DelayedTeleportToBattleArea(float Seconds, Collider2D hitenemy, float freezedelay)
     {
         animator.SetTrigger("TB_State");
+        hitenemy.GetComponent<Animator>().SetTrigger("Hurt");
         yield return new WaitForSeconds(Seconds);
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(freezedelay);
+        Time.timeScale = 1f;
         playerAdvantage = true;
         battleManager.StartBattle(playerAdvantage, team, hitenemy.GetComponent<Enemy>().team);
         Destroy(hitenemy);
         CameraController.Instance.MoveToBattle(transform);
         UI_Manager.Instance.SetSkillButtonsActive(battleManager.currentGameState == TB_BattleManager.GameStates.TurnBased);
+        Destroy(hitenemy.gameObject);
     }
 }

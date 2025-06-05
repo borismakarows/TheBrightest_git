@@ -11,9 +11,10 @@ public class Rest : Skill
     public override int Cost { get => 0; set => base.Cost = value; }
 
     public override GameObject EffectPrefab { get => base.EffectPrefab; set => base.EffectPrefab = value; }
+    public override float skillDuration { get => 0.5f; set => base.skillDuration = value; }
     public override void SkillActivation(GameObject user, GameObject[] targets)
     {
-        Cost += 1;
+        user.GetComponent<Unit>().currentActionPoints += 1;
     }
 
     public override int GetCost()
